@@ -4,7 +4,7 @@ import { font } from "../../../../constants/theme/font";
 const styles = StyleSheet.create({
     container:{
         width:"100%",
-        height:"15%",
+        height:"10%",
         elevation:5,
         backgroundColor:color.white,
         borderTopLeftRadius:20,
@@ -16,9 +16,8 @@ const styles = StyleSheet.create({
         borderColor:"#d3d3d3"
     },
     title:{
-        fontSize:20,
+        fontSize:14,
         fontFamily: font.nova,
-        lineHeight:27,
         color:color.greyText,
         fontWeight:"bold"
     },
