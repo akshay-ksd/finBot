@@ -1,9 +1,13 @@
 import { View, Text, FlatList } from 'react-native'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
 import styles from './Style'
 import useGetAllMessage from '../../../../functions/get_message/GetMessage'
 import SingleRender from '../../molecules/message_single_render/SingleRender'
-const MessageList = () => {
+
+interface messageProps {
+  setButtonStatus: (values: any[]) => void
+}
+const MessageList:FC<messageProps> = () => {
   const message = useGetAllMessage()
   
   const [messageList,setMessageLis] = useState<any>([])
