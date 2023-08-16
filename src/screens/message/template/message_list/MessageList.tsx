@@ -26,17 +26,17 @@ const MessageList = () => {
     setMessageLis((prev:any) => [...prev, ...newData]);
   }
 
-  const selectMessage = useCallback((address:string)=>{
+  const selectMessage = useCallback((index:number)=>{
     const newData = Object.assign([],messageList);
 
-    const index = newData.findIndex((x:any)=>x.address === address)
+    // const index = newData.findIndex((x:any)=>x.address === address)
     newData[index].isSelected = !newData[index]?.isSelected
     setMessageLis(newData)
   },[messageList])
 
-  const itemRender =(item:any)=>{
+  const itemRender =(item:any,index:number)=>{
     return(
-      <SingleRender item={item} selectMessage={selectMessage}/>
+      <SingleRender item={item} selectMessage={selectMessage} index={item?.index}/>
     )
   }
 

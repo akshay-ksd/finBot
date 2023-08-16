@@ -38,10 +38,10 @@ const Footer = () => {
       <Text style={styles.title}>
         Please select only one of your bank messages for tracking credit and debit transactions.
       </Text>
-      {/* <Text style={styles.subTitle}>
+      <Text style={styles.subTitle}>
         Rest assured that only the selected messages will be read and stored for future reference.
         We do not use or store your messages on our database.
-      </Text> */}
+      </Text>
     </Animated.View>
   );
 };

@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         alignItems:"center",
     },
     address:{
-        fontSize:14,
+        fontSize:12,
         fontFamily:font.nova,
         marginLeft:"2%",
         color:color.grey
@@ -37,17 +37,18 @@ const styles = StyleSheet.create({
         paddingBottom:"5%"
     },
     body:{
-        fontSize:16,
+        fontSize:14,
         color:color.greyText,
         fontFamily:font.nova,
         lineHeight:20,
-        left:"6%"
+        left:"6%",
+        fontWeight:"500"
     },
     selectIcon:{
        position:"absolute",
-       left:"2%",
+    //    left:"2%",
        right:0,
-       top:"50%",
+       top:"5%",
        width:"10%"
     }
 });

@@ -66,11 +66,11 @@ const SingleRender = (props: any) => {
                     
 
                 </View>
-                <TouchableOpacity style={styles.message} onPress={() => props.selectMessage(item?.item?.address)}>
+                <TouchableOpacity style={styles.message} onPress={() => props.selectMessage(props.index)}>
                     <Text style={styles?.body}>{item?.item?.body}</Text>
                 </TouchableOpacity>
                 <Animated.View style={[styles.selectIcon,{opacity: selectIcon}]}>
-                        <Icons name={"checkmark-circle-outline"} size={30} color={color.secondary} />
+                        <Icons name={"checkmark-circle-outline"} size={20} color={color.secondary} />
                 </Animated.View>
             </Animated.View>
         </View>

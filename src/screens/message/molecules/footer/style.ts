@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
         borderColor:"#d3d3d3"
     },
     title:{
-        fontSize:20,
+        fontSize:16,
         fontFamily: font.nova,
-        lineHeight:27,
+        // lineHeight:27,
         color:color.greyText,
         fontWeight:"bold"
     },
@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
         fontSize:10,
         marginTop:"2%",
         fontFamily: font.nova,
-        color:color.lightGray,
+        color:color.grey,
         lineHeight:15,
-        fontWeight:"800"
+        // fontWeight:"800"
     }
 });
 

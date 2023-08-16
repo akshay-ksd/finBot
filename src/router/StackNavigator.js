@@ -8,7 +8,7 @@ const StackNavigatorScreen = () => {
     const Stack = createNativeStackNavigator();
 
     return (
-        <Stack.Navigator initialRouteName='TabScreen'>
+        <Stack.Navigator initialRouteName='Message'>
             <Stack.Screen name="TabScreen" component={TabScreen} options={{ headerShown: false }} />
             <Stack.Screen name='Message' component={Message} options={{ headerShown: false }} />
         </Stack.Navigator>
