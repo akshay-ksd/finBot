@@ -1,15 +1,20 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-
+import {View, Text} from 'react-native';
+import React from 'react';
+import styles from './style';
+import DatePicker from '../../component/molecules/datePicker/DatePicker';
+import Strip from './molecules/strip/Strip';
+import SingleRender from './molecules/single_render/SingleRender';
 const HomeScreen = () => {
   return (
-    <View>
-        <Icon name="rocket" size={30} color="#900" />
-      <Text style={{fontFamily:"Proxima Nova Font",fontWeight:"900"}}>HomeScreen</Text>
+    <View style={styles.container}>
+      <DatePicker />
+      <Strip title={'Total Income (Credit)'} value={200} />
+      <SingleRender />
+      <SingleRender />
+      <SingleRender />
+      <Strip title={'Total Expence (Debit)'} value={200} />
     </View>
-  )
-}
+  );
+};
 
-export default HomeScreen
+export default HomeScreen;

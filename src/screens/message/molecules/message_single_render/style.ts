@@ -45,8 +45,9 @@ const styles = StyleSheet.create({
     },
     selectIcon:{
        position:"absolute",
+       left:"2%",
        right:0,
-       top:"5%",
+       top:"50%",
        width:"10%"
     }
 });

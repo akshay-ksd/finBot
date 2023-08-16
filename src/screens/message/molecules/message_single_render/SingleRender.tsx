@@ -40,12 +40,12 @@ const SingleRender = (props: any) => {
         Animated.parallel([
             Animated.timing(fadeAnim, {
                 toValue: 1,
-                duration: 100,
+                duration: 400,
                 useNativeDriver: true,
             }),
             Animated.timing(slideAnim, {
                 toValue: 0,
-                duration: 100,
+                duration: 400,
                 useNativeDriver: true,
             }),
         ]).start();
@@ -70,7 +70,7 @@ const SingleRender = (props: any) => {
                     <Text style={styles?.body}>{item?.item?.body}</Text>
                 </TouchableOpacity>
                 <Animated.View style={[styles.selectIcon,{opacity: selectIcon}]}>
-                        <Icons name={"checkmark-circle-outline"} size={25} color={color.secondary} />
+                        <Icons name={"checkmark-circle-outline"} size={30} color={color.secondary} />
                 </Animated.View>
             </Animated.View>
         </View>

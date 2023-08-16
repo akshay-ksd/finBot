@@ -1,19 +1,9 @@
 import { View, Text, FlatList } from 'react-native'
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import styles from './Style'
 import useGetAllMessage from '../../../../functions/get_message/GetMessage'
 import SingleRender from '../../molecules/message_single_render/SingleRender'
-import { MMKV } from 'react-native-mmkv'
-interface Item {
-  isSelected: boolean;
-  // Other properties of your object
-}
-interface ChildBProps {
-  isNextCheck: (data: Item[]) => void;
-}
-
-const MessageList:FC<ChildBProps> = ({isNextCheck}) => {
-  const storage = new MMKV()
+const MessageList = () => {
   const message = useGetAllMessage()
   
   const [messageList,setMessageLis] = useState<any>([])
@@ -42,7 +32,6 @@ const MessageList:FC<ChildBProps> = ({isNextCheck}) => {
     const index = newData.findIndex((x:any)=>x.address === address)
     newData[index].isSelected = !newData[index]?.isSelected
     setMessageLis(newData)
-    isNextCheck(newData)
   },[messageList])
 
   const itemRender =(item:any)=>{
