@@ -6,6 +6,12 @@ const styles = StyleSheet.create({
         height: "100%",
         width:"100%",
         backgroundColor: color.lightGray
+    },
+    nextButton:{
+        width:"100%",
+        height:"7%",
+        position:"absolute",
+        bottom:0
     }
 });
 

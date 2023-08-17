@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import styles from './style'
-
 const NextButton = () => {
   return (
     <View style={styles.container}>

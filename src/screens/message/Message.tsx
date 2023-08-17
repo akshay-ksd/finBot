@@ -6,11 +6,13 @@ import Footer from './molecules/footer/Footer';
 import NextButton from './molecules/nextButton';
 
 const Message = () => {
-  const [showButton,setShowButton] = useState(false)
+  const [showButton,setShowButton] = useState<boolean>(false)
 
-  const setButtonStatus =()=>{
-
+  const setButtonStatus =(values:boolean)=>{
+    setShowButton(values)
   }
+
+  
   return (
     <View style={styles.container}>
       <Footer/>

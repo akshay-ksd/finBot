@@ -3,11 +3,11 @@ import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
 import styles from './Style'
 import useGetAllMessage from '../../../../functions/get_message/GetMessage'
 import SingleRender from '../../molecules/message_single_render/SingleRender'
-
+import { storeData } from '../../../../functions/mmkv/MMKV'
 interface messageProps {
-  setButtonStatus: (values: any[]) => void
+  setButtonStatus: (values: boolean) => void
 }
-const MessageList:FC<messageProps> = () => {
+const MessageList:FC<messageProps> = (props) => {
   const message = useGetAllMessage()
   
   const [messageList,setMessageLis] = useState<any>([])
@@ -36,6 +36,10 @@ const MessageList:FC<messageProps> = () => {
     // const index = newData.findIndex((x:any)=>x.address === address)
     newData[index].isSelected = !newData[index]?.isSelected
     setMessageLis(newData)
+    const values = newData.some((item:any) => item.isSelected == true)
+    props.setButtonStatus(values)
+    const selectedData = newData.filter((x:any)=>x.isSelected == true);
+    storeData(selectedData,"address");
   },[messageList])
 
   const itemRender =(item:any,index:number)=>{
