@@ -13,7 +13,7 @@ const Strip: FC<childProps> = ({title, value}) => {
       <View style={styles.box}>
         <Text style={styles.title}>{title}</Text>
         <Text style={[styles.title, {fontWeight: '100', fontSize: 14}]}>
-          {value}
+          {value.toFixed(2)}
         </Text>
       </View>
     </View>

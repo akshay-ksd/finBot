@@ -5,7 +5,7 @@ import { color } from "../../../../constants/theme/color";
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        height: 50,
+        height: 75,
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: "white",
