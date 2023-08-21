@@ -35,21 +35,20 @@ const useGetSelectedMEssage = () => {
           (count: any, smsList: any) => {
             var msg = JSON.parse(smsList);
 
-            const filteredMessage = msg.filter((item: any) =>
-              uniqueAddressesArray.includes(item.address),
-            );
-
+            // const filteredMessage = msg.filter((item: any) =>
+            //   uniqueAddressesArray.includes(item.address),
+            // );
+            const filteredMessage = msg;
+            
             const creditKeywords = [
-              'credit',
               'credited',
-              'payment',
+              // 'payment',
               'credited with',
             ];
             const debitKeywords = [
-              'debit',
               'debited',
-              'withdrawal',
-              'debited from',
+              // 'withdrawal',
+              'debited for',
             ];
 
             const transactionSms = filteredMessage.filter((message: any) => {
@@ -94,8 +93,9 @@ const useGetSelectedMEssage = () => {
   };
 
   function findAmount(text: string): number | null {
-    const debitedRegex = /debited with Rs\.([\d.]+)/;
+    const debitedRegex =  /(?:debited with|debited for|debited) Rs\.([\d,]+\.\d+)|debited Rs\. ([\d,]+\.\d+)/i;;
     const creditedRegex = /credited with Rs\.([\d.]+)/;
+    
 
     const debitedMatch = text.match(debitedRegex);
     const creditedMatch = text.match(creditedRegex);
@@ -107,11 +107,13 @@ const useGetSelectedMEssage = () => {
       const creditedAmount = parseFloat(creditedMatch[1]);
       return creditedAmount;
     } else {
+      console.log("nulll",text)
       return null; // Return null if no amount is found
     }
   }
 
   return selectedData;
 };
+
 
 export default useGetSelectedMEssage;

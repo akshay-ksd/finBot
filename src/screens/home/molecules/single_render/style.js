@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "white",
         justifyContent: "space-between",
-        paddingRight: "5%"
+        paddingRight: "5%",
     },
     details: {
         width: "60%",

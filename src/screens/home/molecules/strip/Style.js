@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         width: "100%",
         alignItems: "center",
         justifyContent: "center",
-        height: 30
+        height: 50
     },
     box: {
         width: "95%",
@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 16,
         fontFamily: font.nova,
-        color: color.greyText
+        color: color.greyText,
+        fontWeight:"800"
     }
 });
 
