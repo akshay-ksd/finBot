@@ -5,6 +5,7 @@ import SingleRender from '../../molecules/single_render/SingleRender';
 import useGetSelectedMessage from '../../../../functions/get_message/GetSelectedMessage';
 import Strip from '../../molecules/strip/Strip';
 import Recycler from '../../../../component/recycler/Recycler';
+import InputModel from '../inputModel/InputModel';
 interface Transaction {
   bank: string | null;
   amount: number | null;
@@ -62,6 +63,7 @@ const TransactionList: React.FC = () => {
         width={width}
         renderFooter={() => <View style={{height: 50}}></View>}
       />
+      <InputModel/>
     </View>
   );
 };

@@ -5,5 +5,7 @@ export const color  = {
     greyText:"#333333",
     primary:"#0074B7",
     white:"white",
-    secondary:"#18A558"
+    secondary:"#18A558",
+    lightBlue:"#AEE7F8",
+    lightGreen:"#ABF1BC"
 }
