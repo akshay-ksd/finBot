@@ -12,12 +12,20 @@ import styles from './style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {color} from '../../../../constants/theme/color';
 import ModeSelection from '../../molecules/modeSelection/ModeSelection';
-
+import { saveInvoiceToRealm } from '../../../../database/relemInstense';
+import { generateRandomId } from '../../../../functions/uid';
 
 const InputModel = () => {
   const [model, setModel] = useState(false);
+  const [textEmpty,setTextEmpty] = useState(false);
+  const [amountEmpty,setAmountEmpty] = useState(false);
+
   const modelAnimation = new Animated.Value(0);
-  const mode = useRef(0)
+  const mode = useRef(0);
+
+  const text = useRef<string>("");
+  const amount = useRef<number>(0);
+  const description = useRef<string>("");
 
   const AnimatedPress = Animated.createAnimatedComponent(Pressable);
 
@@ -66,6 +74,46 @@ const InputModel = () => {
     mode.current = m;
   },[])
 
+  const onaChange =(type:string,value:string|number)=>{
+    if(type == "t"){
+      text.current = value;
+    }
+
+    if(type == "a"){
+      amount.current = value;
+    }
+
+    if(type == "d"){
+      description.current = value;
+    }
+  }
+
+  const addData =()=>{
+    if(text.current.length == 0 || amount.current == null){
+      setTextEmpty(true)
+      return
+    }
+
+    setTextEmpty(false)
+    if(amount.current == 0 || amount.current == null){
+      setAmountEmpty(true)
+      return
+    }
+    setAmountEmpty(false)
+    closeModel()
+
+    const newInvoice = {
+      invoiceDate: new Date(),
+      refNumber: generateRandomId(6),
+      entryType: mode.current == 0? "income":"expense",
+      text: text.current,
+      description:description.current,
+      symbol: "",
+      amount: parseFloat(amount.current),
+    }
+    saveInvoiceToRealm(newInvoice)
+  }
+
   return (
     <View style={styles.container}>
       {model && (
@@ -77,14 +125,19 @@ const InputModel = () => {
             <View style={styles.input}>
               <TextInput
                 placeholder="Enter Text"
-                style={[styles.textInput, {width: '40%'}]}
+                style={[styles.textInput, {width: '40%',maxHeight:100,borderColor:textEmpty?"red":color.secondary}]}
+                onChangeText={(t)=>onaChange("t",t)}
+                multiline
+                maxLength={500}
               />
               <TextInput
                 placeholder="Enter Amount"
-                style={styles.textInput}
+                style={[styles.textInput,{width:"30%",borderColor:amountEmpty?"red":color.secondary}]}
                 keyboardType={'number-pad'}
+                onChangeText={(t)=>onaChange("a",t)}
+                maxLength={10}
               />
-              <TouchableOpacity style={styles?.doneButton} onPress={closeModel}>
+              <TouchableOpacity style={styles?.doneButton} onPress={addData}>
                 <Icon size={30} color={color.white} name={'checkmark'} />
               </TouchableOpacity>
             </View>
@@ -99,6 +152,7 @@ const InputModel = () => {
                   marginLeft: '5%',
                 },
               ]}
+              onChangeText={(t)=>onaChange("d",t)}
             />
           </Animated.View>
         </View>

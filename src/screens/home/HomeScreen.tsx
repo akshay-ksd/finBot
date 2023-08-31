@@ -9,7 +9,6 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <DatePicker />
       <TransactionList />
-      {/* <Strip title={'Total Expence (Debit)'} value={200} /> */}
     </View>
   );
 };

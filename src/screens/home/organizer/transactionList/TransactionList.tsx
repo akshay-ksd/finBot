@@ -6,6 +6,7 @@ import useGetSelectedMessage from '../../../../functions/get_message/GetSelected
 import Strip from '../../molecules/strip/Strip';
 import Recycler from '../../../../component/recycler/Recycler';
 import InputModel from '../inputModel/InputModel';
+import {getAllInvoices} from "../../../../database/relemInstense"
 interface Transaction {
   bank: string | null;
   amount: number | null;
@@ -16,42 +17,50 @@ interface Transaction {
 const {height, width} = Dimensions.get('window');
 
 const TransactionList: React.FC = () => {
-  const selectedData: Transaction[] = useGetSelectedMessage();
-  const creditData = selectedData.filter(item => item.type === 'credited');
-  const debitData = selectedData.filter(item => item.type === 'debited');
+  // const selectedData: Transaction[] = useGetSelectedMessage();
+  // const creditData = selectedData.filter(item => item.type === 'credited');
+  // const debitData = selectedData.filter(item => item.type === 'debited');
 
-  const listRef = useRef();
+  const listRef = useRef<any>();
 
-  const calculateTotalAmount = (data: Transaction[]): number => {
-    return data.reduce((total, item) => total + (item.amount || 0), 0);
-  };
-  const creditTotal = useMemo(
-    () => calculateTotalAmount(creditData),
-    [creditData],
-  );
-  const debitTotal = useMemo(
-    () => calculateTotalAmount(debitData),
-    [debitData],
-  );
+  // const calculateTotalAmount = (data: Transaction[]): number => {
+  //   return data.reduce((total, item) => total + (item.amount || 0), 0);
+  // };
+  // const creditTotal = useMemo(
+  //   () => calculateTotalAmount(creditData),
+  //   [creditData],
+  // );
+  // const debitTotal = useMemo(
+  //   () => calculateTotalAmount(debitData),
+  //   [debitData],
+  // );
   useEffect(() => {
-    if (creditData.length) {
-      const mergedData = [
-        {type: 'header', title: 'Debit Data', value: debitTotal},
-        ...debitData,
-        {type: 'header', title: 'Credit Data', value: creditTotal},
-        ...creditData,
-      ];
-      listRef.current.loadDataFromApi(mergedData);
-    }
-  }, [creditData]);
+    getData()
+    // if (creditData.length) {
+    //   const mergedData = [
+    //     {type: 'header', title: 'Debit Data', value: debitTotal},
+    //     ...debitData,
+    //     {type: 'header', title: 'Credit Data', value: creditTotal},
+    //     ...creditData,
+    //   ];
+    //   listRef.current.loadDataFromApi(mergedData);
+    // }
+  }, []);
 
-  const renderItem = (type, item) => {
+  const getData =()=>{
+    const data = getAllInvoices();
+    console.log("data",data)
+  }
+
+  const renderItem = (type:any, item:any) => {
     if (item.item.type === 'header') {
       return <Strip title={item.item.title} value={item.item.value} />;
     } else {
       return <SingleRender item={item?.item} />;
     }
   };
+
+
 
   return (
     <View style={styles.container}>
