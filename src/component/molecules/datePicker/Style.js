@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     button: {
-        padding: 8
+        padding: 8,
+        paddingHorizontal:"3%"
     },
     dateBox: {
         width: 28,
@@ -42,7 +43,8 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     details: {
-        marginLeft: "10%"
+        marginLeft: "10%",
+        width:"43%"
     },
     title: {
         fontSize: 14,

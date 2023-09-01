@@ -103,7 +103,7 @@ const InputModel = () => {
     closeModel()
 
     const newInvoice = {
-      invoiceDate: new Date(),
+      invoiceDate: global.date,
       refNumber: generateRandomId(6),
       entryType: mode.current == 0? "income":"expense",
       text: text.current,
@@ -112,6 +112,9 @@ const InputModel = () => {
       amount: parseFloat(amount.current),
     }
     saveInvoiceToRealm(newInvoice)
+    text.current = "";
+    description.current = "";
+    amount.current = 0;
   }
 
   return (

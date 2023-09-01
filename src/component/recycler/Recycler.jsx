@@ -49,6 +49,9 @@ class Recycler extends Component {
 
         }
       }
+    }else{
+      this.state.dataList.splice(0, this.state.dataList.length);
+      this.setState({dataList:this.state.dataList});
     }
   };
 

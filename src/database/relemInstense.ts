@@ -10,6 +10,7 @@ interface Schema {
   symbol: string,
   amount: number,
 }
+
 const getRealmInstance = (): Realm => {
     return new Realm({ schema: [Invoice] });
 };
