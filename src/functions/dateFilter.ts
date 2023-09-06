@@ -7,7 +7,7 @@ interface Schema {
   symbol: string,
   amount: number,
 }
-const filterByDay =(data:Schema[],date:number,month:number,year:number)=>{
+const filterByDay =(data:Schema[],date:number,month:number,year:number):Schema[]=>{
   const filteredData = data.filter((item) => {
     const itemDate = new Date(item.invoiceDate);
     return (

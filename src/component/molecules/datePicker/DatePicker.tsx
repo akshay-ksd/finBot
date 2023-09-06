@@ -1,10 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './Style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {color} from '../../../constants/theme/color';
 import { getAllInvoices } from '../../../database/relemInstense';
 import { filterByDay } from '../../../functions/dateFilter';
+import * as Animatable from 'react-native-animatable'; // Import react-native-animatable
+
+
 interface Schema {
   invoiceDate: Date,
   refNumber: string,
@@ -16,6 +19,8 @@ interface Schema {
 }
 const DatePicker: React.FC<any> = (props) => {
   const [date, setDate] = useState<Date>(new Date()); // Initialize date state with the current date
+
+  const fade = useRef();
   useEffect(()=>{
     const data = getAllInvoices();
     const filterData = filterByDay(data,date.getDate(),date.getMonth(),date.getFullYear());
@@ -28,6 +33,7 @@ const DatePicker: React.FC<any> = (props) => {
     const newDate = new Date(date);
     newDate.setDate(newDate.getDate() + 1);
     setDate(newDate);
+    fade.current.zoomIn(500)
   };
 
   // Function to decrement the date by 1 day
@@ -35,6 +41,7 @@ const DatePicker: React.FC<any> = (props) => {
     const newDate = new Date(date);
     newDate.setDate(newDate.getDate() - 1);
     setDate(newDate);
+    fade.current.zoomIn(500)
   };
 
   // Function to format the day as "DD"
@@ -50,9 +57,9 @@ const DatePicker: React.FC<any> = (props) => {
         </TouchableOpacity>
 
         <View style={styles.dateDetails}>
-          <View style={styles.dateBox}>
+          <Animatable.View style={styles.dateBox} ref={fade}>
             <Text style={styles.dateText}>{formatDay(date)}</Text>
-          </View>
+          </Animatable.View>
           <View style={styles.details}>
             <Text style={styles.title}>
               {date.toLocaleString('default', {month: 'long'})}{' '}

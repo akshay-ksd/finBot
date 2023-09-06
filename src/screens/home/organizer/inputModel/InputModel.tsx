@@ -7,30 +7,46 @@ import {
   Pressable,
   Keyboard,
 } from 'react-native';
-import React, {useState, useEffect, useCallback, useRef} from 'react';
+import React, {useState, useEffect, useCallback, useRef, FC} from 'react';
 import styles from './style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {color} from '../../../../constants/theme/color';
 import ModeSelection from '../../molecules/modeSelection/ModeSelection';
 import { saveInvoiceToRealm } from '../../../../database/relemInstense';
 import { generateRandomId } from '../../../../functions/uid';
+interface Schema {
+  invoiceDate: Date;
+  refNumber: string;
+  entryType: string;
+  text: string;
+  description: string;
+  symbol: string;
+  amount: number;
+}
 
-const InputModel = () => {
+interface sc {
+  addNewData:(data:Schema)=>void
+}
+const InputModel:FC<sc> = (props) => {
   const [model, setModel] = useState(false);
   const [textEmpty,setTextEmpty] = useState(false);
   const [amountEmpty,setAmountEmpty] = useState(false);
 
   const modelAnimation = new Animated.Value(0);
-  const mode = useRef(0);
+  const mode = useRef(1);
 
   const text = useRef<string>("");
   const amount = useRef<number>(0);
   const description = useRef<string>("");
 
+  const inputRef1 = useRef();
+  const inputRef2 = useRef();
+
   const AnimatedPress = Animated.createAnimatedComponent(Pressable);
 
   const openModel = () => {
     setModel(true);
+    mode.current = 1
   };
 
   useEffect(() => {
@@ -91,12 +107,14 @@ const InputModel = () => {
   const addData =()=>{
     if(text.current.length == 0 || amount.current == null){
       setTextEmpty(true)
+      inputRef1.current.focus()
       return
     }
 
     setTextEmpty(false)
     if(amount.current == 0 || amount.current == null){
       setAmountEmpty(true)
+      inputRef2.current.focus()
       return
     }
     setAmountEmpty(false)
@@ -105,13 +123,16 @@ const InputModel = () => {
     const newInvoice = {
       invoiceDate: global.date,
       refNumber: generateRandomId(6),
-      entryType: mode.current == 0? "income":"expense",
+      entryType: mode.current == 0? "Income":"Expense",
       text: text.current,
       description:description.current,
       symbol: "",
       amount: parseFloat(amount.current),
     }
-    saveInvoiceToRealm(newInvoice)
+    saveInvoiceToRealm(newInvoice);
+    setTimeout(() => {
+      props.addNewData(newInvoice)
+    }, 800);
     text.current = "";
     description.current = "";
     amount.current = 0;
@@ -132,6 +153,8 @@ const InputModel = () => {
                 onChangeText={(t)=>onaChange("t",t)}
                 multiline
                 maxLength={500}
+                ref={inputRef1}
+                autoFocus
               />
               <TextInput
                 placeholder="Enter Amount"
@@ -139,6 +162,7 @@ const InputModel = () => {
                 keyboardType={'number-pad'}
                 onChangeText={(t)=>onaChange("a",t)}
                 maxLength={10}
+                ref={inputRef2}
               />
               <TouchableOpacity style={styles?.doneButton} onPress={addData}>
                 <Icon size={30} color={color.white} name={'checkmark'} />

@@ -24,14 +24,20 @@ const saveInvoiceToRealm = (newInvoice: Schema) => {
     } catch (error) {
       console.error('Error saving invoice to Realm:', error);
     } finally {
-      realm.close();
+      // realm.close();
     }
 };
 
 const getAllInvoices = (): Invoice[] => {
   const realm = getRealmInstance();
   const allInvoices = realm.objects<Invoice>('incomeExpense');
-  const invoicesArray = Array.from(allInvoices);
+  
+  // Sort the invoices by invoiceDate in descending order
+  const sortedInvoices = allInvoices.sorted('invoiceDate', true); // Use true for descending order
+  
+  // Convert the sorted Realm Results to an array
+  const invoicesArray = Array.from(sortedInvoices);
+  
   return invoicesArray;
 };
 

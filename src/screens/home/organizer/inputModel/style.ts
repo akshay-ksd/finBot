@@ -64,10 +64,11 @@ const styles = StyleSheet.create({
         color:color.greyText,
         borderBottomWidth:1,
         borderColor:color.secondary,
+        height:50
     },
     doneButton:{
-        width:40,
-        height:40,
+        width:48,
+        height:48,
         borderRadius:60,
         backgroundColor:color.primary,
         alignItems:"center",
@@ -81,7 +82,8 @@ const styles = StyleSheet.create({
     },
     topComp:{
         height:"70%",
-        width:"100%"
+        width:"100%",
+        backgroundColor:'rgba(58,58,58,0.1)'
     }
 });
 

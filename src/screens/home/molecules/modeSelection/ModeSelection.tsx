@@ -9,7 +9,7 @@ interface ModeSelectionProps {
 
 const ModeSelection: FC<ModeSelectionProps> = ({modeChange }) => {
 
-  const [mode,setMode] = useState(0);
+  const [mode,setMode] = useState(1);
 
   const buttonStyle: StyleProp<ViewStyle> = {
     ...styles.button,

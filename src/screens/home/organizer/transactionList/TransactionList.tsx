@@ -41,11 +41,11 @@ const TransactionList: React.FC<any> = (props,ref) => {
       if(data.length){
         let creditTotal = 0;
         let debitTotal = 0;
-         const income:Schema[] = data.filter((x)=>x.entryType == "income");
+         const income:Schema[] = data.filter((x)=>x.entryType == "Income");
          if(income.length){
             creditTotal = calculateTotalAmount(income)
          }
-         const expense:Schema[] = data.filter((x)=>x.entryType == "expense");
+         const expense:Schema[] = data.filter((x)=>x.entryType == "Expense");
          if(expense.length){
           debitTotal = calculateTotalAmount(expense)
          } 
@@ -56,21 +56,25 @@ const TransactionList: React.FC<any> = (props,ref) => {
           {type: 'header', title: 'Income', value: creditTotal},
           ...income,
         ];
-        console.log("mergedData",mergedData)
         listRef.current.loadDataFromApi(mergedData);
       }else{
         listRef.current.loadDataFromApi([]);
       }
      
+    },
+    loadNewData: (data: Schema)=>{
+      listRef.current.loadNewData(data);
     }
   }))
 
 
-  const renderItem = (type: any, item: any) => {
+  const renderItem = (type: any, item: any,index: number, extendedState:object) => {
     if (item.item.type === 'header') {
-      return <Strip title={item.item.title} value={item.item.value} />;
+      if(item?.item?.value > 0){
+        return <Strip title={item.item.title} value={item.item.value} index={index}/>;
+      }
     } else {
-      return <SingleRender item={item?.item} />;
+      return <SingleRender item={item?.item} index={index}/>;
     }
   };
 
@@ -84,7 +88,7 @@ const TransactionList: React.FC<any> = (props,ref) => {
         width={width}
         renderFooter={() => <View style={{height: 50}}></View>}
       />
-      <InputModel />
+      {/* <InputModel /> */}
     </View>
   );
 };
