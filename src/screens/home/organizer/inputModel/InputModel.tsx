@@ -14,6 +14,9 @@ import {color} from '../../../../constants/theme/color';
 import ModeSelection from '../../molecules/modeSelection/ModeSelection';
 import { saveInvoiceToRealm } from '../../../../database/relemInstense';
 import { generateRandomId } from '../../../../functions/uid';
+import Ripple from 'react-native-material-ripple';
+import * as Animatable from "react-native-animatable"
+
 interface Schema {
   invoiceDate: Date;
   refNumber: string;
@@ -49,6 +52,7 @@ const InputModel:FC<sc> = (props) => {
     mode.current = 1
   };
 
+ 
   useEffect(() => {
     if (model) {
       // Animate the modelBox when it opens
@@ -57,6 +61,9 @@ const InputModel:FC<sc> = (props) => {
         duration: 300,
         useNativeDriver: true,
       }).start();
+      setTimeout(() => {
+        inputRef1.current.focus()
+      }, 500);
     } else {
       // Reset the animation value when the model closes
       modelAnimation.setValue(0);
@@ -154,7 +161,6 @@ const InputModel:FC<sc> = (props) => {
                 multiline
                 maxLength={500}
                 ref={inputRef1}
-                autoFocus
               />
               <TextInput
                 placeholder="Enter Amount"
@@ -164,9 +170,9 @@ const InputModel:FC<sc> = (props) => {
                 maxLength={10}
                 ref={inputRef2}
               />
-              <TouchableOpacity style={styles?.doneButton} onPress={addData}>
+              <Ripple style={styles?.doneButton} onPress={addData}>
                 <Icon size={30} color={color.white} name={'checkmark'} />
-              </TouchableOpacity>
+              </Ripple>
             </View>
             <TextInput
               placeholder="Enter Description"
@@ -186,9 +192,9 @@ const InputModel:FC<sc> = (props) => {
       )}
       {!model && (
         <View>
-          <TouchableOpacity style={styles.addButton} onPress={openModel}>
+          <Ripple style={styles.addButton} onPress={openModel}>
             <Icon size={30} color={color.white} name={'add'} />
-          </TouchableOpacity>
+          </Ripple>
         </View>
       )}
     </View>

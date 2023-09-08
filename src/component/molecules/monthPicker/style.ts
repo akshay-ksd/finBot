@@ -47,19 +47,10 @@ const styles = StyleSheet.create({
         width:"43%"
     },
     title: {
-        fontSize: 14,
+        fontSize: 16,
         fontFamily: font.nova,
         color: color.secondary,
         fontWeight: "800"
-    },
-    subTitl: {
-        fontFamily: font.nova,
-        fontSize: 10,
-        color: color.greyText
-    },
-    balanceContainer:{
-        alignItems:"center",
-        justifyContent:"center"
     }
 });
 

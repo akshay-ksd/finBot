@@ -63,7 +63,8 @@ class Recycler extends Component {
   };
 
   loadNewData = data => {
-    if (this.state.dataList.length !== 0) {
+    const isHeaderCreated = this.state.dataList.find((x)=>x?.item?.title == data?.entryType)
+    if (isHeaderCreated) {
       const index = this.state.dataList.findIndex(
         item => item.item?.title == data?.entryType,
       );
@@ -79,9 +80,14 @@ class Recycler extends Component {
         }, 0);
         this.state.dataList[index].item.value = total;
         this.setState({dataList: this.state.dataList});
+        this.setState({
+          list: new DataProvider((r1, r2) => {
+            return r1 !== r2;
+          }).cloneWithRows(this.state.dataList),
+          load: true,
+        });
       }
     }else{
-
       const mergedData = [
         {type: 'header', title: data.entryType, value: data.amount},
         data

@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: font.nova,
         color: color.greyText,
-        fontWeight:"800"
+        // fontWeight:"700"
     }
 });
 

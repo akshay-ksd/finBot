@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: font.nova,
         color: color.greyText,
-        fontWeight: "700",
+        // fontWeight: "700",
         textAlign: "left"
     }
 

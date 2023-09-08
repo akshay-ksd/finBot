@@ -28,11 +28,12 @@ const HomeScreen = () => {
   const [load, setLoad] = useState(true);
   const listRef = useRef<any>();
   const animatableRef = useRef<Animatable.View | null>(null); // Ref for Animatable.View
+  const pickerRef = useRef()
 
   const loadData = (data: Schema[]) => {
     // Call the fadeIn animation on the Animatable.View component
     if (animatableRef.current) {
-      animatableRef.current.zoomIn(600); 
+      animatableRef.current.fadeIn(1500); 
     }
 
     setTimeout(() => {
@@ -42,12 +43,13 @@ const HomeScreen = () => {
 
   const addNewData = (data: Schema) => {
     listRef.current.loadNewData(data);
+    pickerRef.current.recalculateBalance()
   };
 
   return (
     <View style={styles.container}>
       <Suspense fallback={<ActivityIndicator />}>
-        <DatePicker loadData={loadData} />
+        <DatePicker loadData={loadData} ref={pickerRef}/>
       </Suspense>
       <Suspense fallback={<ActivityIndicator />}>
         {/* Animatable.View component with ref */}

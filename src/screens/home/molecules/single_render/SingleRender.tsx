@@ -1,7 +1,7 @@
 import {View, Text, Animated} from 'react-native';
 import React, {FC, useEffect, useRef} from 'react';
 import styles from './style';
-
+import * as Animatable from "react-native-animatable"
 interface obj {
   invoiceDate: Date;
   refNumber: string;
@@ -27,7 +27,7 @@ const SingleRender: FC<Transaction> = props => {
   });
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const firstRender = useRef(false);
+  const animateRef = useRef();
   // useEffect(() => {
   //   // Use setTimeout to start each animation with a delay based on the item's index
   //   const animationDelay = props.index * 50; // Adjust the delay duration as needed
@@ -41,8 +41,14 @@ const SingleRender: FC<Transaction> = props => {
   //   }, animationDelay);
   // }, [fadeAnim, props.index]);
 
+  useEffect(()=>{
+    setTimeout(() => {
+      // animateRef.current.fadeIn()
+    }, 500);
+  },[])
+
   return (
-    <Animated.View style={{...styles.container}}>
+    <Animatable.View style={{...styles.container}} ref={animateRef}>
       <View style={styles.details}>
         <Text style={styles.title}>{props?.item?.text}</Text>
         <Text style={[styles.title, {fontSize: 10, fontWeight: '100'}]}>
@@ -52,7 +58,7 @@ const SingleRender: FC<Transaction> = props => {
       <Text style={[styles.title, {textAlign: 'right'}]}>
         ₹{props?.item?.amount}
       </Text>
-    </Animated.View>
+    </Animatable.View>
   );
 };
 

@@ -2,11 +2,12 @@ import React, { FC, useState } from "react";
 import { View, TouchableOpacity, Text, StyleProp, ViewStyle } from "react-native";
 import styles from "../../organizer/inputModel/style";
 import { color } from "../../../../constants/theme/color";
+import Ripple from 'react-native-material-ripple';
 
 interface ModeSelectionProps {
   modeChange: (mode: number) => void;
 }
-
+ 
 const ModeSelection: FC<ModeSelectionProps> = ({modeChange }) => {
 
   const [mode,setMode] = useState(1);
@@ -47,17 +48,17 @@ const ModeSelection: FC<ModeSelectionProps> = ({modeChange }) => {
 
   return (
     <View style={styles.headers}>
-      <TouchableOpacity
+      <Ripple
         style={incomeButtonStyle}
         onPress={() => setModeValue(0)}>
         <Text style={labelStyle}>Income</Text>
-      </TouchableOpacity>
+      </Ripple>
 
-      <TouchableOpacity
+      <Ripple
         style={expenseButtonStyle}
         onPress={() => setModeValue(1)}>
         <Text style={labelStyle}>Expense</Text>
-      </TouchableOpacity>
+      </Ripple>
     </View>
   );
 };
