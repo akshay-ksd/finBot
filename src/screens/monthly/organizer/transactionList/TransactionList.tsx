@@ -1,13 +1,38 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import styles from './style'
-import SingleRender from '../../molecules/singleRender/SingleRender'
-const TransactionList = () => {
+import {View, Text, Dimensions} from 'react-native';
+import React, {FC, forwardRef, useEffect, useImperativeHandle, useRef} from 'react';
+import styles from './style';
+import SingleRender from '../../molecules/singleRender/SingleRender';
+import Recycler from '../../../../component/recycler/Recycler';
+
+const {height,width} = Dimensions.get("window");
+
+const TransactionList: FC<any> = (props, ref) => {
+  const listRef = useRef();
+
+  useImperativeHandle(ref, () => ({
+    loadData: (data: any) => {
+      listRef.current.loadDataFromApi(data)
+    },
+  }));
+
+  const renderItem =(type:any,item:any,index:number)=>{
+    return(
+      <SingleRender data={item?.item}/>
+    )
+  }
+
   return (
     <View style={styles.container}>
-      <SingleRender/>
+      <Recycler
+        horizontal={false}
+        ref={listRef}
+        rowRenderer={renderItem}
+        height={height / 5}
+        width={width}
+        renderFooter={() => <View style={{height: 50}}></View>}
+      />
     </View>
-  )
-}
+  );
+};
 
-export default TransactionList
+export default forwardRef(TransactionList);

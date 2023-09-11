@@ -40,6 +40,7 @@ class Recycler extends Component {
   }
 
   loadDataFromApi = data => {
+
     if (data.length !== 0) {
       this.state.dataList.splice(0, this.state.dataList.length);
       for (let i in data) {
