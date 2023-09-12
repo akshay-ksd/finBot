@@ -13,7 +13,7 @@ const Monthly = () => {
   return (
     <View style={styles.container}>
       <MonthPicker loadData = {loadData}/>
-      <BalanceBox/>
+      {/* <BalanceBox/> */}
       <TransactionList ref={listRef}/>
     </View>
   );

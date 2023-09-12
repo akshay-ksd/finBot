@@ -6,11 +6,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {color} from '../../../constants/theme/color';
 import { getAllInvoices } from '../../../database/relemInstense';
 import { filterByMonth } from '../../../functions/dateFilter';
-
+import { useIsFocused } from '@react-navigation/native';
 const MonthPicker: FC<any> = (props) => {
   const [date, setDate] = useState<Date>(new Date()); // Initialize date state with the current date
   const [balance, setBalance] = useState<number>(0); // Initialize balance state
-
+  const isFocus = useIsFocused()
   const fade = useRef();
   interface Schema {
     invoiceDate: Date;
@@ -23,8 +23,10 @@ const MonthPicker: FC<any> = (props) => {
   }
 
   useEffect(()=>{
-    getData()
-  },[])
+    if(isFocus){
+      getData()
+    }
+  },[isFocus])
 
   const getData = ()=> {
     const data:any[] = getAllInvoices();

@@ -1,4 +1,4 @@
-import {View, Text, Dimensions} from 'react-native';
+import {View, Text, Dimensions,FlatList} from 'react-native';
 import React, {FC, forwardRef, useEffect, useImperativeHandle, useRef} from 'react';
 import styles from './style';
 import SingleRender from '../../molecules/singleRender/SingleRender';
@@ -27,7 +27,7 @@ const TransactionList: FC<any> = (props, ref) => {
         horizontal={false}
         ref={listRef}
         rowRenderer={renderItem}
-        height={height / 5}
+        height={height / 3}
         width={width}
         renderFooter={() => <View style={{height: 50}}></View>}
       />

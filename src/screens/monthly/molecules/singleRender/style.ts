@@ -5,11 +5,14 @@ import { color } from "../../../../constants/theme/color";
 const styles = StyleSheet.create({
     container:{
         width:"100%",
+        marginVertical:5,
+        alignItems:"center",
+        justifyContent:"center"
     },
     box:{
-        width:"100%",
-        // height:"100%",
-        backgroundColor:color.white
+        width:"93%",
+        backgroundColor:color.white,
+        borderRadius:10
     },
     header:{
         width:"100%",
@@ -28,7 +31,8 @@ const styles = StyleSheet.create({
         width:"100%",
         flexDirection:"row",
         alignItems:"center",
-        justifyContent:"space-evenly"
+        justifyContent:"space-evenly",
+        marginBottom:10
     },
     subView:{
         width:"50%",
@@ -55,14 +59,11 @@ const styles = StyleSheet.create({
         width:"100%",
         flexDirection:"row",
         alignItems:"center",
-        height:"auto",
-        marginTop:"2%"
+        marginTop:"2%",
     },
     itemParent:{
         width:"50%",
         height:50,
-        alignItems:"center",
-        justifyContent:"center"
     }
 });
 

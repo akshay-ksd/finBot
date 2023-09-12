@@ -55,8 +55,8 @@ const SingleRender: FC<Transaction> = props => {
           {timeString}
         </Text>
       </View>
-      <Text style={[styles.title, {textAlign: 'right'}]}>
-        ₹{props?.item?.amount}
+      <Text style={[styles.title, {textAlign: 'right',fontWeight:"700"}]}>
+        ₹{props?.item?.amount.toFixed(2)}
       </Text>
     </Animatable.View>
   );
