@@ -39,10 +39,11 @@ const styles = StyleSheet.create({
         fontWeight: "800"
     },
     dateDetails: {
+        // flexDirection: "row",
         alignItems: "center"
     },
     details: {
-        marginLeft: "10%",
+        marginLeft: "15%",
         width:"43%"
     },
     title: {

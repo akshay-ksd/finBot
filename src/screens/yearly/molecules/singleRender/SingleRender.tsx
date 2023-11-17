@@ -2,10 +2,11 @@ import {View, Text} from 'react-native';
 import React, {FC, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import styles from './style';
 import SubRender from '../subRender/SubRender';
-import {color} from '../../../../constants/theme/color';
-import Ripple from 'react-native-material-ripple';
-import {useNavigation} from '@react-navigation/native';
+import {color} from '../../../../constants/theme/color'; 
+import Ripple from "react-native-material-ripple";
+import { useNavigation } from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
+
 interface Schema {
   invoiceDate: Date;
   refNumber: string;
@@ -38,7 +39,7 @@ function calculateIncomeAndExpense(data: Entry[]): {
     } else if (entry.entryType === 'Expense') {
       totalExpense += entry.amount;
     }
-  }
+  } 
 
   return {
     totalIncome,
@@ -49,18 +50,19 @@ const formatDay = (date: Date) => {
   return date.getDate().toString().padStart(2, '0');
 };
 
-const SingleRender: FC<any> = ({data,index}) => {
-  const navigation = useNavigation();
+
+const SingleRender: FC<any> = ({data}) => {
+  const navigation = useNavigation()
   const animatableRef = useRef()
 
   useEffect(()=>{
     animatableRef.current.fadeInUp(500)
   },[])
 
-  const goToDayScreen = () => {
-    global.selectedDate = data[0].invoiceDate;
-    navigation.navigate('Day');
-  };
+  const goToDayScreen =()=>{
+    global.selectedYear = data[0].invoiceDate
+    navigation.navigate("Monthly")
+  }
   return (
     <Animatable.View
       style={styles.container}
@@ -71,18 +73,10 @@ const SingleRender: FC<any> = ({data,index}) => {
       <Ripple style={styles.box} onPress={goToDayScreen}>
         <View style={styles.header}>
           <Text style={styles.dateText}>
-            {formatDay(new Date(data[0].invoiceDate))}{' '}
             {new Date(data[0].invoiceDate).toLocaleString('default', {
               month: 'long',
             })}{' '}
-            <Text
-              style={[
-                styles.title,
-                {fontWeight: '100', fontSize: 10},
-              ]}>{`  (Balance ₹${(
-              calculateIncomeAndExpense(data).totalIncome -
-              calculateIncomeAndExpense(data).totalExpense
-            ).toFixed(2)})`}</Text>
+            <Text style={[styles.title,{fontWeight:"100",fontSize:10}]}>{`  (Balance ₹${(calculateIncomeAndExpense(data).totalIncome-calculateIncomeAndExpense(data).totalExpense).toFixed(2)})`}</Text>
           </Text>
         </View>
         <View style={styles.transactionType}>
@@ -91,7 +85,7 @@ const SingleRender: FC<any> = ({data,index}) => {
             <Text
               style={[
                 styles.title,
-                {marginTop: 10, color: calculateIncomeAndExpense(data).totalIncome > 0?color.secondary:color.grey, fontWeight: '700'},
+                {marginTop: 10, color:calculateIncomeAndExpense(data).totalIncome > 0? color.secondary:color.grey, fontWeight: '700'},
               ]}>
               ₹{calculateIncomeAndExpense(data).totalIncome.toFixed(2)}
             </Text>
@@ -101,7 +95,7 @@ const SingleRender: FC<any> = ({data,index}) => {
             <Text
               style={[
                 styles.title,
-                {marginTop: 10, color: "red", fontWeight: '700'},
+                {marginTop: 10, color:calculateIncomeAndExpense(data).totalExpense > 0?"red": color.greyText, fontWeight: '700'},
               ]}>
               ₹{calculateIncomeAndExpense(data).totalExpense.toFixed(2)}
             </Text>

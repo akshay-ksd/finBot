@@ -1,20 +1,32 @@
 import {View, Text} from 'react-native';
-import React, { useRef } from 'react';
+import React, {useRef} from 'react';
 import MonthPicker from '../../component/molecules/monthPicker/MonthPicker';
 import styles from './style';
 import TransactionList from './organizer/transactionList/TransactionList';
-import BalanceBox from './molecules/balanceBox/BalanceBox';
+import * as Animatable from 'react-native-animatable';
 
 const Monthly = () => {
-  const listRef = useRef()
-  const loadData =(data:any)=>{
-    listRef.current.loadData(data)
-  }
+  const listRef = useRef();
+  const animatableRef = useRef<Animatable.View | null>(null); // Ref for Animatable.View
+
+
+  const loadData = (data: any) => {
+    if (animatableRef.current) {
+      // animatableRef.current.fadeIn(1000); 
+    }
+    listRef.current.loadData(data);
+  };
   return (
     <View style={styles.container}>
-      <MonthPicker loadData = {loadData}/>
+      <MonthPicker loadData={loadData} />
       {/* <BalanceBox/> */}
-      <TransactionList ref={listRef}/>
+      <Animatable.View
+        ref={animatableRef}
+        animation="fadeIn"
+        duration={500}
+        delay={500}>
+        <TransactionList ref={listRef} />
+      </Animatable.View>
     </View>
   );
 };

@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         backgroundColor:color.white
     },
     dateText:{
-        fontSize:14,
+        fontSize:16,
         fontWeight:"800",
         fontFamily:font.nova,
         color:color.greyText

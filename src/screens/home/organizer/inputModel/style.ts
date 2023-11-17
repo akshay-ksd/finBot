@@ -5,7 +5,7 @@ const {height} = Dimensions.get("window")
 const styles = StyleSheet.create({
     container:{
         position:"absolute",
-        bottom:0,
+        bottom:"2%",
         width:"100%",
         zIndex:100,
     },
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         alignItems:"center",
         justifyContent:"space-evenly"
     },
-    textInput:{
+      textInput:{
         fontSize:18,
         fontFamily:font.nova,
         color:color.greyText,

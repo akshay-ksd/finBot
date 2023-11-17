@@ -42,4 +42,25 @@ const filterByMonth =(data:Schema[],month:number,year:number):Schema[]=>{
   return orderedAndGroupedData
 }
 
-export {filterByDay,filterByMonth}
+const filterByYear =(data:Schema[],year:number):Schema[]=>{
+  const filteredData = data.filter((item) => {
+    const itemDate = new Date(item.invoiceDate);
+    return (
+      itemDate.getFullYear() === year
+    );
+  });
+  const orderedAndGroupedData = filteredData.reduce((acc:any, obj:any) => {
+    const d = new Date(obj.invoiceDate)
+
+    const existingDateEntry:any = acc.find((entry:any) => new Date(entry[0]?.invoiceDate).getMonth() === d.getMonth());
+    if (existingDateEntry) {
+      existingDateEntry.push(obj);
+    } else {
+      acc.push([obj]);
+    }
+    return acc;
+  }, []);
+  return orderedAndGroupedData
+}
+
+export {filterByDay,filterByMonth,filterByYear}

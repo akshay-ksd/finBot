@@ -7,6 +7,7 @@ import { getAllInvoices } from '../../../database/relemInstense';
 import { filterByDay } from '../../../functions/dateFilter';
 import * as Animatable from 'react-native-animatable'; // Import react-native-animatable
 import { calculateBalance } from '../../../functions/calculateBalance';
+import { useIsFocused } from '@react-navigation/native';
 interface Schema {
   invoiceDate: Date;
   refNumber: string;
@@ -20,7 +21,7 @@ interface Schema {
 const DatePicker: React.FC<any> = (props,ref) => {
   const [date, setDate] = useState<Date>(new Date()); // Initialize date state with the current date
   const [balance, setBalance] = useState<number>(0); // Initialize balance state
-
+  const isFocused = useIsFocused()
   const fade = useRef();
 
   useEffect(() => {
@@ -39,6 +40,13 @@ const DatePicker: React.FC<any> = (props,ref) => {
 
     global.date = date;
   }, [date]);
+
+  useEffect(()=>{
+    if(isFocused&&global.selectedDate){
+      setDate(global.selectedDate)
+      global.selectedDate = null
+    }
+  },[isFocused])
 
   useImperativeHandle(ref,()=>({
     recalculateBalance:()=>{
